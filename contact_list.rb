@@ -9,6 +9,6 @@ class ContactList
   puts "search - Search contacts"
   user_input = gets.chomp
 
-  puts user_input
+  puts user_input  
 
 end
