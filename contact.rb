@@ -5,12 +5,13 @@ require 'csv'
 
 class Contact 
 
-  attr_accessor :name, :email
+  attr_accessor :id, :name, :email
   
   # Creates a new contact object
   # @param name [String] The contact's name
   # @param email [String] The contact's email address
-  def initialize(name, email)
+  def initialize(id, name, email)
+    @id = id
     @name = name
     @email = email
   end
@@ -21,7 +22,11 @@ class Contact
     # Opens 'contacts.csv' and creates a Contact object for each line in the file (aka each contact).
     # @return [Array<Contact>] Array of Contact objects
     def all
-      # TODO: Return an Array of Contact instances made from the data in 'contacts.csv'.
+      contacts_array = []
+      CSV.foreach('contacts.csv') do |row|
+        contacts_array << Contact.new(row[0], row[1], row[2])
+      end
+      contacts_array
     end
 
     # Creates a new contact, adding it to the csv file, returning the new contact.
@@ -35,7 +40,8 @@ class Contact
     # @param id [Integer] the contact id
     # @return [Contact, nil] the contact with the specified id. If no contact has the id, returns nil.
     def find(id)
-      # TODO: Find the Contact in the 'contacts.csv' file with the matching id.
+    
+# TODO: Find the Contact in the 'contacts.csv' file with the matching id.
     end
     
     # Search for contacts by either name or email.
