@@ -22,8 +22,17 @@ class ContactList
       puts "---\n#{contacts.length} records total"
 
     when "show"
+      display_found_contact = Contact.find(ARGV[1])
+      if Contact.find(ARGV[1])
+        puts "#{display_found_contact.name}\n#{display_found_contact.email}"
+      else
+        puts "Contact #{ARGV[1]} not found."
+      end
+
 
     when "search"
+
+
     else
       puts "Here is a list of available commands:"
       puts "new - Create a new contact"

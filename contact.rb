@@ -37,11 +37,14 @@ class Contact
     end
     
     # Find the Contact in the 'contacts.csv' file with the matching id.
-    # @param id [Integer] the contact id
-    # @return [Contact, nil] the contact with the specified id. If no contact has the id, returns nil.
     def find(id)
-    
-# TODO: Find the Contact in the 'contacts.csv' file with the matching id.
+      found_contact = nil
+      CSV.foreach('contacts.csv') do |row|
+        if row[0] == id #remember this tomorrow, it may help in search method
+          found_contact = Contact.new(row[0], row[1], row[2])
+        end
+      end
+      found_contact
     end
     
     # Search for contacts by either name or email.
