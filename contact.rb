@@ -35,10 +35,6 @@ class Contact
       end
       new_contact
     end
-
-    def to_s
-      puts "#{name} + #{email}"
-    end
     
     # Find the Contact in the 'contacts.csv' file with the matching id.
     # @param id [Integer] the contact id
