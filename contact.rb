@@ -7,9 +7,6 @@ class Contact
 
   attr_accessor :id, :name, :email
   
-  # Creates a new contact object
-  # @param name [String] The contact's name
-  # @param email [String] The contact's email address
   def initialize(id, name, email)
     @id = id
     @name = name
@@ -30,10 +27,17 @@ class Contact
     end
 
     # Creates a new contact, adding it to the csv file, returning the new contact.
-    # @param name [String] the new contact's name
-    # @param email [String] the contact's email
     def create(name, email)
-      # TODO: Instantiate a Contact, add its data to the 'contacts.csv' file, and return it.
+      id = CSV.read('contacts.csv').last[0].to_i + 1
+      new_contact = Contact.new(id, name, email)
+      CSV.open('contacts.csv', 'a') do |file|
+        file << [new_contact.id, new_contact.name, new_contact.email]
+      end
+      new_contact
+    end
+
+    def to_s
+      puts "#{name} + #{email}"
     end
     
     # Find the Contact in the 'contacts.csv' file with the matching id.
