@@ -5,12 +5,17 @@ require 'csv'
 
 class Contact 
 
+
   attr_accessor :id, :name, :email
   
   def initialize(id, name, email)
     @id = id
     @name = name
     @email = email
+  end
+
+  def to_s
+    return "#{id}: #{name} (#{email})"
   end
 
   # Provides functionality for managing contacts in the csv file.
@@ -51,9 +56,15 @@ class Contact
     # @param term [String] the name fragment or email fragment to search for
     # @return [Array<Contact>] Array of Contact objects.
     def search(term)
-      # TODO: Select the Contact instances from the 'contacts.csv' file whose name or email attributes contain the search term.
+      found_contact = []
+      CSV.foreach('contacts.csv') do |row|
+        if row[1] =~ /#{term}/ || row[2] =~ /#{term}/
+          found_contact << Contact.new(row[0], row[1], row[2])
+        end
+      end
+      found_contact
     end
-
+# TODO: Select the Contact instances from the 'contacts.csv' file whose name or email attributes contain the search term
   end
 
 end

@@ -31,6 +31,16 @@ class ContactList
 
 
     when "search"
+      contacts = Contact.search(ARGV[1])
+      if contacts
+        contacts.each do |contact|
+          puts contact.to_s
+        end
+        puts '---'
+        puts "Records Found: #{contacts.count}"
+      else
+        puts "Contact #{ARGV[1]} not found."
+      end
 
 
     else
